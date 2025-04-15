@@ -3,9 +3,1092 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Nexus Start</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --accent: #fd79a8;
+            --text: #f5f6fa;
+            --text-secondary: #dcdde1;
+            --card-bg: rgba(47, 53, 66, 0.85);
+            --modal-bg: rgba(47, 53, 66, 0.95);
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --danger: #d63031;
+            --shadow-lg: 0 15px 30px rgba(0, 0, 0, 0.3);
+            --shadow-sm: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-radius: 12px;
+            --border-radius-sm: 6px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            min-height: 100vh;
+            background-color: #2d3436;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            transition: background-image 1s ease-in-out;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(45, 52, 54, 0.9) 0%, rgba(83, 92, 104, 0.8) 100%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-top: 40px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            animation: fadeInDown 0.8s;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .greeting {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .time-date {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .search-container {
+            position: relative;
+            margin-bottom: 30px;
+            animation: fadeIn 0.8s 0.2s both;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 15px 20px;
+            padding-left: 50px;
+            border-radius: var(--border-radius);
+            border: none;
+            background-color: var(--card-bg);
+            color: var(--text);
+            font-size: 1rem;
+            outline: none;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .search-bar:focus {
+            box-shadow: 0 0 0 2px var(--accent);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text);
+            animation: fadeIn 0.8s 0.4s both;
+        }
+
+        .shortcuts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+            animation: fadeIn 0.8s 0.6s both;
+        }
+
+        .shortcut-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            text-decoration: none;
+            color: var(--text);
+            min-height: 110px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .shortcut-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
+        }
+
+        .shortcut-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .shortcut-icon {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .shortcut-name {
+            font-size: 0.85rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 100%;
+            font-weight: 500;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background-color: var(--danger);
+            color: white;
+            border: none;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .shortcut-card:hover .delete-btn {
+            opacity: 1;
+        }
+
+        .add-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+            z-index: 100;
+        }
+
+        .add-btn:hover {
+            transform: scale(1.1) rotate(90deg);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-content {
+            background-color: var(--modal-bg);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 450px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .modal.show .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.3rem;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-btn:hover {
+            color: var(--danger);
+            transform: rotate(90deg);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: var(--border-radius-sm);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(0, 0, 0, 0.2);
+            color: var(--text);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(253, 121, 168, 0.3);
+            outline: none;
+        }
+
+        .icon-preview {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: var(--border-radius-sm);
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Weather Widget */
+        .weather-widget {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 0.8s 0.3s both;
+        }
+
+        .weather-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .weather-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .weather-icon {
+            font-size: 2.5rem;
+            color: var(--warning);
+        }
+
+        .weather-temp {
+            font-size: 2rem;
+            font-weight: 500;
+        }
+
+        .weather-details {
+            text-align: right;
+        }
+
+        .weather-city {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .weather-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Quick Links */
+        .quick-links {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            animation: fadeIn 0.8s 0.5s both;
+        }
+
+        .quick-link {
+            padding: 8px 15px;
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text);
+            text-decoration: none;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .quick-link:hover {
+            background-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .shortcuts-grid {
+                grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+                gap: 12px;
+            }
+            
+            .shortcut-card {
+                padding: 12px;
+                min-height: 100px;
+            }
+            
+            .shortcut-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 20px;
+            }
+            
+            .greeting {
+                font-size: 1rem;
+            }
+            
+            .time-date {
+                font-size: 0.8rem;
+            }
+            
+            .search-bar {
+                padding: 12px 15px 12px 45px;
+            }
+            
+            .search-icon {
+                left: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+                padding-top: 30px;
+            }
+            
+            .shortcuts-grid {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+                gap: 10px;
+            }
+            
+            .shortcut-card {
+                padding: 10px;
+                min-height: 90px;
+            }
+            
+            .shortcut-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 18px;
+                margin-bottom: 8px;
+            }
+            
+            .shortcut-name {
+                font-size: 0.75rem;
+            }
+            
+            .add-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .weather-widget {
+                padding: 12px;
+            }
+            
+            .weather-icon {
+                font-size: 2rem;
+            }
+            
+            .weather-temp {
+                font-size: 1.5rem;
+            }
+            
+            .weather-city {
+                font-size: 0.9rem;
+            }
+            
+            .weather-desc {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="container">
+        <header>
+            <div class="header-left">
+                <div class="logo">N</div>
+                <div>
+                    <div class="greeting" id="greeting">Good Morning</div>
+                    <div class="time-date" id="timeDate">Loading...</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Weather Widget -->
+        <div class="weather-widget" id="weatherWidget">
+            <div class="weather-content">
+                <div class="weather-info">
+                    <div class="weather-icon" id="weatherIcon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="weather-temp" id="weatherTemp">--°</div>
+                </div>
+                <div class="weather-details">
+                    <div class="weather-city" id="weatherCity">Loading...</div>
+                    <div class="weather-desc" id="weatherDesc">Weather data</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="quick-links">
+            <a href="https://mail.google.com" class="quick-link" target="_blank">
+                <i class="fas fa-envelope"></i> Gmail
+            </a>
+            <a href="https://calendar.google.com" class="quick-link" target="_blank">
+                <i class="fas fa-calendar"></i> Calendar
+            </a>
+            <a href="https://drive.google.com" class="quick-link" target="_blank">
+                <i class="fas fa-cloud"></i> Drive
+            </a>
+            <a href="https://github.com" class="quick-link" target="_blank">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="https://reddit.com" class="quick-link" target="_blank">
+                <i class="fab fa-reddit"></i> Reddit
+            </a>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-bar" placeholder="Search or enter a URL..." id="searchInput">
+        </div>
+
+        <!-- Shortcuts Section -->
+        <h2 class="section-title">
+            <i class="fas fa-rocket"></i> My Shortcuts
+        </h2>
+        <div class="shortcuts-grid" id="shortcutsGrid">
+            <!-- Shortcuts will be added here dynamically -->
+        </div>
+    </div>
+
+    <!-- Add Button -->
+    <button class="add-btn" id="addBtn">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    <!-- Add/Edit Shortcut Modal -->
+    <div class="modal" id="shortcutModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">
+                    <i class="fas fa-plus-circle"></i> Add Shortcut
+                </h2>
+                <button class="close-btn" id="closeModalBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="shortcutForm">
+                <input type="hidden" id="shortcutIndex">
+                <div class="icon-preview" id="iconPreview">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <div class="form-group">
+                    <label for="shortcutName" class="form-label">Name</label>
+                    <input type="text" class="form-input" id="shortcutName" required>
+                </div>
+                <div class="form-group">
+                    <label for="shortcutUrl" class="form-label">URL</label>
+                    <input type="url" class="form-input" id="shortcutUrl" required placeholder="https://example.com">
+                </div>
+                <div class="form-group">
+                    <label for="shortcutIcon" class="form-label">Icon</label>
+                    <select class="form-input" id="shortcutIcon">
+                        <option value="fas fa-globe">🌐 Default</option>
+                        <option value="fas fa-search">🔍 Search</option>
+                        <option value="fas fa-envelope">📧 Email</option>
+                        <option value="fas fa-video">📺 Video</option>
+                        <option value="fas fa-music">🎵 Music</option>
+                        <option value="fas fa-newspaper">📰 News</option>
+                        <option value="fas fa-shopping-cart">🛒 Shopping</option>
+                        <option value="fas fa-book">📚 Books</option>
+                        <option value="fas fa-code">💻 Code</option>
+                        <option value="fas fa-chart-line">📊 Analytics</option>
+                        <option value="fas fa-gamepad">🎮 Games</option>
+                        <option value="fas fa-plane">✈️ Travel</option>
+                        <option value="fas fa-utensils">🍴 Food</option>
+                        <option value="fas fa-dumbbell">🏋️ Fitness</option>
+                        <option value="fas fa-palette">🎨 Art</option>
+                    </select>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary" id="cancelBtn">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const shortcutsGrid = document.getElementById('shortcutsGrid');
+            const addBtn = document.getElementById('addBtn');
+            const shortcutModal = document.getElementById('shortcutModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const shortcutForm = document.getElementById('shortcutForm');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const searchInput = document.getElementById('searchInput');
+            const iconPreview = document.getElementById('iconPreview');
+            const greetingElement = document.getElementById('greeting');
+            const timeDateElement = document.getElementById('timeDate');
+            const weatherIcon = document.getElementById('weatherIcon');
+            const weatherTemp = document.getElementById('weatherTemp');
+            const weatherCity = document.getElementById('weatherCity');
+            const weatherDesc = document.getElementById('weatherDesc');
+            const weatherWidget = document.getElementById('weatherWidget');
+
+            // Form fields
+            const shortcutIndex = document.getElementById('shortcutIndex');
+            const shortcutName = document.getElementById('shortcutName');
+            const shortcutUrl = document.getElementById('shortcutUrl');
+            const shortcutIcon = document.getElementById('shortcutIcon');
+
+            // Load shortcuts from localStorage
+            let shortcuts = JSON.parse(localStorage.getItem('shortcuts')) || [];
+            
+            // Set Bing daily wallpaper
+            function setBingWallpaper() {
+                // Use Bing Wallpaper API (works for most regions)
+                const bingWallpaperUrl = 'https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US';
+                
+                fetch(bingWallpaperUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        if(data.images && data.images[0]) {
+                            const imageUrl = `https://www.bing.com${data.images[0].url}`;
+                            document.body.style.backgroundImage = `url(${imageUrl})`;
+                            document.body.style.backgroundSize = 'cover';
+                            document.body.style.backgroundPosition = 'center';
+                            document.body.style.backgroundAttachment = 'fixed';
+                        }
+                    })
+                    .catch(error => {
+                        console.log('Error fetching Bing wallpaper:', error);
+                        // Fallback to a local background
+                        document.body.style.backgroundImage = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                    });
+            }
+
+            // Update time and greeting
+            function updateTimeAndGreeting() {
+                const now = new Date();
+                const hours = now.getHours();
+                
+                // Set greeting based on time of day
+                let greeting;
+                if (hours < 12) {
+                    greeting = 'Good Morning';
+                } else if (hours < 18) {
+                    greeting = 'Good Afternoon';
+                } else {
+                    greeting = 'Good Evening';
+                }
+                greetingElement.textContent = greeting;
+                
+                // Format time and date
+                const options = { 
+                    weekday: 'long', 
+                    month: 'long', 
+                    day: 'numeric', 
+                    hour: '2-digit', 
+                    minute: '2-digit' 
+                };
+                timeDateElement.textContent = now.toLocaleDateString('en-US', options);
+            }
+
+            // Get weather data (using OpenWeatherMap API)
+            function getWeather() {
+                // You'll need to sign up for a free API key at https://openweathermap.org/
+                const apiKey = 'YOUR_OPENWEATHERMAP_API_KEY'; // Replace with your actual API key
+                const city = 'Dhaka'; // Default city - change to your location
+                
+                if(!apiKey || apiKey === 'YOUR_OPENWEATHERMAP_API_KEY') {
+                    weatherWidget.style.display = 'none';
+                    return;
+                }
+                
+                fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if(data.main && data.weather) {
+                            weatherTemp.textContent = `${Math.round(data.main.temp)}°C`;
+                            weatherCity.textContent = `${data.name}, ${data.sys.country}`;
+                            weatherDesc.textContent = data.weather[0].description;
+                            
+                            // Set appropriate weather icon
+                            const weatherId = data.weather[0].id;
+                            let weatherIconClass = 'fas fa-cloud';
+                            
+                            if(weatherId >= 200 && weatherId < 300) {
+                                weatherIconClass = 'fas fa-bolt'; // Thunderstorm
+                            } else if(weatherId >= 300 && weatherId < 400) {
+                                weatherIconClass = 'fas fa-cloud-rain'; // Drizzle
+                            } else if(weatherId >= 500 && weatherId < 600) {
+                                weatherIconClass = 'fas fa-umbrella'; // Rain
+                            } else if(weatherId >= 600 && weatherId < 700) {
+                                weatherIconClass = 'fas fa-snowflake'; // Snow
+                            } else if(weatherId >= 700 && weatherId < 800) {
+                                weatherIconClass = 'fas fa-smog'; // Atmosphere
+                            } else if(weatherId === 800) {
+                                weatherIconClass = 'fas fa-sun'; // Clear
+                            } else if(weatherId > 800) {
+                                weatherIconClass = 'fas fa-cloud'; // Clouds
+                            }
+                            
+                            weatherIcon.innerHTML = `<i class="${weatherIconClass}"></i>`;
+                        }
+                    })
+                    .catch(error => {
+                        console.log('Error fetching weather:', error);
+                        weatherWidget.style.display = 'none';
+                    });
+            }
+
+            // Render shortcuts
+            function renderShortcuts(filter = '') {
+                shortcutsGrid.innerHTML = '';
+                
+                const filteredShortcuts = shortcuts.filter(shortcut => 
+                    shortcut.name.toLowerCase().includes(filter.toLowerCase()) || 
+                    shortcut.url.toLowerCase().includes(filter.toLowerCase())
+                );
+                
+                filteredShortcuts.forEach((shortcut, index) => {
+                    const shortcutCard = document.createElement('a');
+                    shortcutCard.className = 'shortcut-card';
+                    shortcutCard.href = shortcut.url;
+                    shortcutCard.target = '_blank';
+                    
+                    // Use Font Awesome icon if available
+                    let iconContent;
+                    if (shortcut.icon && shortcut.icon.startsWith('fas ')) {
+                        iconContent = `<i class="${shortcut.icon}"></i>`;
+                    } else {
+                        // Fallback to emoji or favicon
+                        iconContent = shortcut.icon || '<i class="fas fa-globe"></i>';
+                    }
+                    
+                    shortcutCard.innerHTML = `
+                        <div class="shortcut-icon">${iconContent}</div>
+                        <div class="shortcut-name">${shortcut.name}</div>
+                        <button class="delete-btn" data-index="${index}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    `;
+                    
+                    // Add edit on long press
+                    shortcutCard.addEventListener('contextmenu', (e) => {
+                        e.preventDefault();
+                        editShortcut(index);
+                    });
+                    
+                    // Touch devices - long press
+                    let pressTimer;
+                    shortcutCard.addEventListener('touchstart', (e) => {
+                        pressTimer = setTimeout(() => {
+                            editShortcut(index);
+                        }, 800); // 800ms for long press
+                    });
+                    
+                    shortcutCard.addEventListener('touchend', (e) => {
+                        clearTimeout(pressTimer);
+                    });
+                    
+                    shortcutsGrid.appendChild(shortcutCard);
+                });
+            }
+            
+            // Add new shortcut
+            function addShortcut() {
+                shortcutIndex.value = '';
+                modalTitle.innerHTML = '<i class="fas fa-plus-circle"></i> Add Shortcut';
+                shortcutName.value = '';
+                shortcutUrl.value = '';
+                shortcutIcon.value = 'fas fa-globe';
+                iconPreview.innerHTML = '<i class="fas fa-globe"></i>';
+                shortcutModal.style.display = 'flex';
+                setTimeout(() => {
+                    shortcutModal.classList.add('show');
+                }, 10);
+            }
+            
+            // Edit existing shortcut
+            function editShortcut(index) {
+                const shortcut = shortcuts[index];
+                shortcutIndex.value = index;
+                modalTitle.innerHTML = '<i class="fas fa-edit"></i> Edit Shortcut';
+                shortcutName.value = shortcut.name;
+                shortcutUrl.value = shortcut.url;
+                shortcutIcon.value = shortcut.icon || 'fas fa-globe';
+                iconPreview.innerHTML = shortcut.icon 
+                    ? `<i class="${shortcut.icon}"></i>` 
+                    : '<i class="fas fa-globe"></i>';
+                shortcutModal.style.display = 'flex';
+                setTimeout(() => {
+                    shortcutModal.classList.add('show');
+                }, 10);
+            }
+            
+            // Delete shortcut
+            function deleteShortcut(index) {
+                if (confirm('Are you sure you want to delete this shortcut?')) {
+                    shortcuts.splice(index, 1);
+                    saveShortcuts();
+                    renderShortcuts();
+                }
+            }
+            
+            // Save shortcuts to localStorage
+            function saveShortcuts() {
+                localStorage.setItem('shortcuts', JSON.stringify(shortcuts));
+            }
+            
+            // Event Listeners
+            addBtn.addEventListener('click', addShortcut);
+            
+            closeModalBtn.addEventListener('click', () => {
+                shortcutModal.classList.remove('show');
+                setTimeout(() => {
+                    shortcutModal.style.display = 'none';
+                }, 300);
+            });
+            
+            cancelBtn.addEventListener('click', () => {
+                shortcutModal.classList.remove('show');
+                setTimeout(() => {
+                    shortcutModal.style.display = 'none';
+                }, 300);
+            });
+            
+            shortcutForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const newShortcut = {
+                    name: shortcutName.value,
+                    url: shortcutUrl.value,
+                    icon: shortcutIcon.value
+                };
+                
+                if (shortcutIndex.value === '') {
+                    // Add new shortcut
+                    shortcuts.push(newShortcut);
+                } else {
+                    // Update existing shortcut
+                    shortcuts[shortcutIndex.value] = newShortcut;
+                }
+                
+                saveShortcuts();
+                renderShortcuts();
+                shortcutModal.classList.remove('show');
+                setTimeout(() => {
+                    shortcutModal.style.display = 'none';
+                }, 300);
+            });
+            
+            searchInput.addEventListener('input', (e) => {
+                renderShortcuts(e.target.value);
+            });
+            
+            // Update icon preview when icon selection changes
+            shortcutIcon.addEventListener('change', (e) => {
+                const iconClass = e.target.value;
+                iconPreview.innerHTML = `<i class="${iconClass}"></i>`;
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target === shortcutModal) {
+                    shortcutModal.classList.remove('show');
+                    setTimeout(() => {
+                        shortcutModal.style.display = 'none';
+                    }, 300);
+                }
+            });
+            
+            // Handle delete button clicks (delegated event)
+            document.addEventListener('click', (e) => {
+                if (e.target.closest('.delete-btn')) {
+                    e.preventDefault();
+                    const index = e.target.closest('.delete-btn').getAttribute('data-index');
+                    deleteShortcut(parseInt(index));
+                }
+            });
+            
+            // Initialize
+            setBingWallpaper();
+            updateTimeAndGreeting();
+            setInterval(updateTimeAndGreeting, 60000); // Update every minute
+            getWeather();
+            
+            // Initial render with default shortcuts if empty
+            if (shortcuts.length === 0) {
+                shortcuts = [
+                    {
+                        name: 'Google',
+                        url: 'https://google.com',
+                        icon: 'fas fa-search'
+                    },
+                    {
+                        name: 'YouTube',
+                        url: 'https://youtube.com',
+                        icon: 'fas fa-video'
+                    },
+                    {
+                        name: 'GitHub',
+                        url: 'https://github.com',
+                        icon: 'fas fa-code'
+                    },
+                    {
+                        name: 'Twitter',
+                        url: 'https://twitter.com',
+                        icon: 'fab fa-twitter'
+                    },
+                    {
+                        name: 'Reddit',
+                        url: 'https://reddit.com',
+                        icon: 'fab fa-reddit'
+                    },
+                    {
+                        name: 'Wikipedia',
+                        url: 'https://wikipedia.org',
+                        icon: 'fas fa-book'
+                    }
+                ];
+                saveShortcuts();
+            }
+            
+            renderShortcuts();
+        });
+    </script>
 </body>
 </html>
